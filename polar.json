@@ -1,0 +1,59 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  
+    "data": {
+      "url": "https://raw.githubusercontent.com/MervynYeoMonash/FIT3179_HomeorkWeek10/main/oil_reserves.csv"
+    },
+    "title": {
+      "text" : "Top 10 Countries by Oil Reserves"},
+    "width" : 700,
+    "height" : 600,
+  
+    "layer": [{
+      "mark": {
+        "type": "arc", 
+        "innerRadius": 20, 
+        "stroke":"white"}
+      }
+    ],
+    
+    "params": [
+      {"name": "highlight", "select": {"type": "point", "on": "mouseover"}},
+      {"name": "select", "select": "point"}
+            ],
+  
+    "encoding": {
+      "theta": {
+        "field": "Reserves", 
+        "type": "quantitative", 
+        "stack": true},
+      "radius": {
+        "field": "Reserves", 
+        "scale": {
+          "type": "sqrt", 
+          "zero": true, 
+          "rangeMin": 40}},
+      "color": {
+        "field": "Country", 
+        "type": "nominal", 
+        "scale" :{"scheme": "browns"}
+        },
+      "fillOpacity": {
+              "condition": {"param": "highlight", "value": 1},
+              "value": 0.5
+          },
+      
+  
+        "tooltip": [
+              
+              {"field": "Country", "type": "nominal", "title": "Country"},
+              {"field": "Reserves", "type": "quantitative", "title": "Oil Reserves"}
+          ]
+    },
+    "config": {"style": {
+      "cell": {
+        "stroke": "transparent"
+      }
+    }}
+  
+  }
